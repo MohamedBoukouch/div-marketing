@@ -15,18 +15,19 @@ const Header = () => {
   return (
     <header className={`sticky top-0 z-50 shadow-sm ${darkMode ? 'bg-[#1E1E2D]' : 'bg-white'}`}>
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <div className={`text-2xl font-bold ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>DIV-Marketing</div>
+        <div className={`text-2xl font-bold ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}>Div-Marketing</div>
         
-        <nav className="hidden md:flex space-x-8 items-center">
+        <nav className="hidden md:flex space-x-8 items-center hover: cursor-pointer">
           {['Services', 'Projets', 'Blog', 'Contact'].map((item) => (
             <button
               key={item}
+              // to={item === 'Blog' ? '/blog' : `/#${item.toLowerCase()}`}
               onClick={() => navigateTo(item.toLowerCase())}
               className={`${
                 activeSection === item.toLowerCase() 
                   ? darkMode ? 'text-indigo-400 font-medium' : 'text-indigo-600 font-medium'
                   : darkMode ? 'text-gray-300' : 'text-gray-600'
-              } ${darkMode ? 'hover:text-indigo-300' : 'hover:text-indigo-500'} transition-colors`}
+              } ${darkMode ? 'hover:text-indigo-300' : 'hover:text-indigo-500'} transition-colors hover:cursor-pointer`}
             >
               {item}
             </button>
