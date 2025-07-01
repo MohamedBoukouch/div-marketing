@@ -1,5 +1,7 @@
 import { useState, useContext } from 'react';
 import { DarkModeContext } from '../App';
+import { FiSun, FiMoon } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 
 const Header = () => {
   const { darkMode, setDarkMode } = useContext(DarkModeContext);
@@ -30,17 +32,31 @@ const Header = () => {
             </button>
           ))}
           
-          <button 
-            onClick={() => setDarkMode(!darkMode)}
-            className={`ml-4 p-2 rounded-full ${darkMode ? 'bg-gray-700 text-gray-200' : 'bg-gray-200 text-gray-700'}`}
-          >
-            {darkMode ? '☀️' : '🌙'}
-          </button>
+          
         </nav>
         
-        <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md transition-colors">
-          Devis Gratuit
-        </button>
+        <motion.button
+            onClick={() => setDarkMode(!darkMode)}
+            className={`ml-4 p-2 rounded-full flex items-center justify-center ${
+              darkMode ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'
+            }`}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            <motion.div
+              key={darkMode ? 'light' : 'dark'}
+              initial={{ rotate: -30 }}
+              animate={{ rotate: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {darkMode ? (
+                <FiSun className="w-5 h-5" />
+              ) : (
+                <FiMoon className="w-5 h-5" />
+              )}
+            </motion.div>
+          </motion.button>
       </div>
     </header>
   );

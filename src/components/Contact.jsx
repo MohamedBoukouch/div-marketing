@@ -1,191 +1,132 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { DarkModeContext } from '../App';
+import { FiMail, FiPhone, FiMessageSquare, FiClock } from 'react-icons/fi';
+import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const Contact = () => {
   const { darkMode } = useContext(DarkModeContext);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    budget: '',
-    timeline: '',
-    message: ''
-  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Message sent!');
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      budget: '',
-      timeline: '',
-      message: ''
-    });
+  // Animation variants
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 30 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        duration: 0.5
+      } 
+    },
+    hover: {
+      y: -5,
+      transition: { duration: 0.2 }
+    }
   };
 
   const contactMethods = [
-    { 
-      title: 'WhatsApp', 
-      desc: 'Réponse immédiate • Disponible 24/7', 
-      icon: '📱' 
+    {
+      name: "WhatsApp",
+      icon: <FaWhatsapp className="text-2xl" />,
+      color: "bg-green-500",
+      hoverColor: "hover:bg-green-600",
+      text: "text-white",
+      link: "https://wa.me/message/N4FZ3C53UGI2I1",
+      description: "Message instantané"
     },
-    { 
-      title: 'Email', 
-      desc: 'contact@div-marketing.com', 
-      icon: '✉️' 
+    {
+      name: "Téléphone",
+      icon: <FiPhone className="text-2xl" />,
+      color: "bg-blue-500",
+      hoverColor: "hover:bg-blue-600",
+      text: "text-white",
+      link: "tel:+212777189017",
+      description: "Appelez-nous directement"
     },
-    { 
-      title: 'Appel Direct', 
-      desc: '+33 1 23 45 67 89', 
-      icon: '📞' 
+    {
+      name: "Email",
+      icon: <FiMail className="text-2xl" />,
+      color: "bg-indigo-500",
+      hoverColor: "hover:bg-indigo-600",
+      text: "text-white",
+      link: "mailto:divmarketing03@gmail.com",
+      description: "Réponse sous 24h"
     },
-    { 
-      title: 'Nos Horaires', 
-      desc: 'Lun-Ven: 9h-18h • Sam: 10h-14h', 
-      icon: '🕒' 
+    {
+      name: "Instagram",
+      icon: <FaInstagram className="text-2xl" />,
+      color: "bg-gradient-to-r from-purple-500 to-pink-500",
+      hoverColor: "hover:from-purple-600 hover:to-pink-600",
+      text: "text-white",
+      link: "https://www.instagram.com/divm.arketing/",
+      description: "Suivez-nous"
     }
   ];
 
   return (
-    <section id="contact" className={`py-20 ${darkMode ? 'bg-[#1E1E2D]' : 'bg-white'}`}>
+    <section id="contact" className={`py-20 ${darkMode ? 'bg-[#0f172a]' : 'bg-gray-50'}`}>
       <div className="container mx-auto px-6">
-        <h2 className={`text-3xl font-bold text-center mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-          Démarrons Votre Projet
-        </h2>
-        <p className={`text-xl text-center max-w-3xl mx-auto mb-16 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-          Prêt à transformer votre vision en réalité digitale ?
-        </p>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
-            <h3 className={`text-2xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-              Parlons de Votre Projet
-            </h3>
-            
-            <div className="space-y-6">
-              {contactMethods.map((method, index) => (
-                <div key={index} className="flex items-start">
-                  <span className="text-2xl mr-4">{method.icon}</span>
-                  <div>
-                    <h4 className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-                      {method.title}
-                    </h4>
-                    <p className={darkMode ? 'text-gray-400' : 'text-gray-600'}>
-                      {method.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          <div>
-            <h3 className={`text-2xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-              Formulaire de Contact
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="name" className={`block font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  Nom complet *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className={`w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                    darkMode ? 'bg-[#2D2D3A] text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'
-                  } border`}
-                  required
-                />
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+            Contactez-Nous
+          </h2>
+          <div className={`w-24 h-1 mx-auto mb-6 ${darkMode ? 'bg-gradient-to-r from-blue-400 to-blue-600' : 'bg-gradient-to-r from-indigo-500 to-purple-600'}`}></div>
+          <p className={`text-lg md:text-xl max-w-3xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            Choisissez votre méthode de contact préférée. Nous sommes disponibles pour répondre à vos questions.
+          </p>
+        </motion.div>
+
+        {/* Contact Methods Grid */}
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
+          {contactMethods.map((method, index) => (
+            <motion.a
+              key={index}
+              href={method.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={item}
+              whileHover="hover"
+              className={`flex flex-col items-center p-8 rounded-2xl shadow-lg transition-all duration-300 ${method.color} ${method.hoverColor} ${method.text}`}
+            >
+              <div className="mb-4 p-4 bg-white/20 rounded-full">
+                {method.icon}
               </div>
-              
-              <div>
-                <label htmlFor="email" className={`block font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className={`w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                    darkMode ? 'bg-[#2D2D3A] text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'
-                  } border`}
-                  required
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="phone" className={`block font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  Téléphone
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  className={`w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                    darkMode ? 'bg-[#2D2D3A] text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'
-                  } border`}
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="service" className={`block font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  Service souhaité *
-                </label>
-                <select
-                  id="service"
-                  name="service"
-                  value={formData.service}
-                  onChange={(e) => setFormData({...formData, service: e.target.value})}
-                  className={`w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                    darkMode ? 'bg-[#2D2D3A] text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'
-                  } border`}
-                  required
-                >
-                  <option value="">Sélectionnez un service</option>
-                  <option value="mobile">Mobile Premium</option>
-                  <option value="web">Web Avancé</option>
-                  <option value="design">Design Innovation</option>
-                  <option value="social">Social Media Pro</option>
-                </select>
-              </div>
-              
-              <div>
-                <label htmlFor="message" className={`block font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  Décrivez votre projet *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
-                  rows="4"
-                  className={`w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                    darkMode ? 'bg-[#2D2D3A] text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'
-                  } border`}
-                  required
-                ></textarea>
-              </div>
-              
-              <button 
-                type="submit" 
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-md font-bold w-full transition-colors"
+              <h3 className="text-xl font-bold mb-2">{method.name}</h3>
+              <p className="text-sm opacity-90 text-center">{method.description}</p>
+              <motion.div
+                className="mt-4 px-6 py-2 bg-white/20 rounded-full text-sm font-medium"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Envoyer le Message
-              </button>
-            </form>
-          </div>
-        </div>
+                Cliquez ici
+              </motion.div>
+            </motion.a>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
