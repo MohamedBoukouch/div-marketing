@@ -6,7 +6,7 @@ class ServiceModel {
           title: "Mobile Premium",
           description: "Apps natives iOS/Android avec IA intégrée",
           features: [
-            "React Native Expert",
+            "Flutter Expert",
             "Future Advanced",
             "AI integration",
             "App Store Optimization"

@@ -63,7 +63,7 @@ const Contact = () => {
       hoverColor: "hover:bg-indigo-600",
       text: "text-white",
       link: "mailto:divmarketing03@gmail.com",
-      description: "Réponse sous 24h"
+      description: "divmarketing03@gmail.com"
     },
     {
       name: "Instagram",

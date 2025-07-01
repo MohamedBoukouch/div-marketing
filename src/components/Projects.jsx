@@ -4,9 +4,11 @@ import { FiArrowRight, FiLayers, FiSmartphone, FiCode, FiPieChart } from 'react-
 import { motion } from 'framer-motion';
 import { ProjectModel } from '../models/ProjectModel';
 
-// Import your images (adjust paths as needed)
-import fintechImage from '../assets/sliders/slide1.jpeg';
-import ecommerceImage from '../assets/sliders/slide2.png'; // Add your e-commerce image
+// Import your images
+import fintechImage from '../assets/projects/maroconcours.png';
+import ecommerceImage from '../assets/projects/LeafSense_AI.jpeg';
+import siyaqa from '../assets/projects/project3.webp';
+import learn_english from '../assets/projects/laern_english.png';
 
 const Projects = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -16,8 +18,14 @@ const Projects = () => {
   const allProjects = ProjectModel.getProjects().map(project => {
     if (project.id === 1) return { ...project, imageUrl: fintechImage };
     if (project.id === 2) return { ...project, imageUrl: ecommerceImage };
+    if (project.id === 3) return { ...project, imageUrl: siyaqa };
+    if (project.id === 4) return { ...project, imageUrl: learn_english };
     return project;
   });
+
+  const handleClick = (link) => {
+    window.open(link, '_blank');
+  };
 
   const projectTypes = ProjectModel.getProjectTypes();
   
@@ -66,13 +74,13 @@ const Projects = () => {
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <h2 className={`text-4xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
             Projets Exceptionnels
           </h2>
-          <div className={`w-24 h-1 mx-auto mb-6 ${darkMode ? 'bg-gradient-to-r from-blue-400 to-blue-600' : 'bg-gradient-to-r from-indigo-500 to-purple-600'}`}></div>
+          <div className={`w-24 h-1 mx-auto mb-6 ${darkMode ? 'bg-blue-500' : 'bg-indigo-600'}`}></div>
           <p className={`text-xl max-w-3xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
             Découvrez nos réalisations les plus remarquables.
           </p>
@@ -91,14 +99,14 @@ const Projects = () => {
               onClick={() => setTypeFilter(type.id)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all flex items-center ${
+              className={`px-5 py-2 rounded-full text-sm font-medium flex items-center ${
                 typeFilter === type.id 
                   ? darkMode 
-                    ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/20' 
-                    : 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/20'
+                    ? 'bg-blue-600 text-white' 
+                    : 'bg-indigo-600 text-white'
                   : darkMode 
                     ? 'bg-[#1a1a24] text-gray-300 hover:bg-[#252535]' 
-                    : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
+                    : 'bg-white text-gray-700 hover:bg-gray-100'
               }`}
             >
               {getTypeIcon(type.id)}
@@ -111,7 +119,7 @@ const Projects = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className={`text-center py-16 rounded-xl ${darkMode ? 'bg-[#1a1a24] text-gray-300' : 'bg-white text-gray-600 shadow-lg'}`}
+            className={`text-center py-16 rounded-xl ${darkMode ? 'bg-[#1a1a24] text-gray-300' : 'bg-white text-gray-600'}`}
           >
             <p className="text-lg mb-4">Aucun projet trouvé avec ces filtres.</p>
             <motion.button 
@@ -135,10 +143,10 @@ const Projects = () => {
                 key={project.id} 
                 variants={item}
                 whileHover={{ y: -8 }}
-                className={`rounded-2xl overflow-hidden shadow-xl transition-all duration-300 ${darkMode ? 'bg-[#1a1a24] border border-[#252535]' : 'bg-white border border-gray-100'}`}
+                className={`rounded-2xl overflow-hidden shadow-xl ${darkMode ? 'bg-[#1a1a24]' : 'bg-white'}`}
               >
-                {/* Project Image with blue accent */}
-                <div className="h-56 w-full relative overflow-hidden">
+                {/* Larger Image Container */}
+                <div className="h-80 w-full relative overflow-hidden"> {/* Changed from h-56 to h-80 */}
                   <motion.img 
                     src={project.imageUrl} 
                     alt={project.title}
@@ -171,10 +179,9 @@ const Projects = () => {
                       backgroundColor: darkMode ? '#3b82f6' : '#6366f1'
                     }}
                     whileTap={{ scale: 0.97 }}
-                    className={`w-full mt-4 py-3 px-4 rounded-lg flex items-center justify-center gap-2 font-medium transition-colors ${
-                      darkMode 
-                        ? 'bg-blue-600 text-white' 
-                        : 'bg-indigo-600 text-white'
+                    onClick={() => handleClick(project.link)}
+                    className={`w-full py-3 px-4 rounded-lg flex items-center justify-center gap-2 font-medium ${
+                      darkMode ? 'bg-blue-600 text-white' : 'bg-indigo-600 text-white'
                     }`}
                   >
                     Découvrir le projet

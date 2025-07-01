@@ -97,7 +97,7 @@ const Footer = () => {
         {/* Copyright Section */}
         <div className={`border-t ${darkMode ? 'border-gray-800' : 'border-gray-200'} mt-16 pt-8 text-center`}>
           <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-            © 2024 DIV-Marketing. Tous droits réservés.
+            © 2024 Div-Marketing. Tous droits réservés.
           </p>
         </div>
       </div>
