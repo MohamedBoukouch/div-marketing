@@ -51,13 +51,25 @@ class ProjectModel {
         description:"Appli éducative pour initier les enfants à l’anglais de manière amusante.",
         detailedDescription: "Une expérience d'achat immersive avec réalité augmentée pour essayer virtuellement les produits avant achat. Intégration avec les principaux fournisseurs de paiement et système de recommandation IA.",
         type: "mobile",
-        category: "ecommerce",
         imageUrl: "/images/ecommerce-platform.jpg",
         link:"",
-        gallery: [
-          "/images/ecommerce-1.jpg",
-          "/images/ecommerce-2.jpg"
-        ],
+      },
+      {
+        id: 5,
+        title: "Landing Page",
+        description:"landing page professionnelle et attractive pour une marque d’huile naturelle fortifiante pour cheveux.",
+        detailedDescription: "Une expérience d'achat immersive avec réalité augmentée pour essayer virtuellement les produits avant achat. Intégration avec les principaux fournisseurs de paiement et système de recommandation IA.",
+        type: "brand-design",
+        imageUrl: "/images/ecommerce-platform.jpg",
+        link:"",
+      },
+      {
+        id: 6,
+        title: "Landing Page",
+        description:"landing page professionnelle et attractive pour une marque d’huile naturelle fortifiante pour cheveux.",
+        type: "brand-design",
+        imageUrl: "/images/ecommerce-platform.jpg",
+        link:"",
       }
     ];
   }

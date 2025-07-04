@@ -9,6 +9,8 @@ import fintechImage from '../assets/projects/maroconcours.png';
 import ecommerceImage from '../assets/projects/LeafSense_AI.jpeg';
 import siyaqa from '../assets/projects/project3.webp';
 import learn_english from '../assets/projects/laern_english.png';
+import Landing_Page_2 from '../assets/projects/designe/LandingPage_02.png';
+import Landing_Page_3 from '../assets/projects/designe/LandingPage_03.png';
 
 const Projects = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -20,6 +22,8 @@ const Projects = () => {
     if (project.id === 2) return { ...project, imageUrl: ecommerceImage };
     if (project.id === 3) return { ...project, imageUrl: siyaqa };
     if (project.id === 4) return { ...project, imageUrl: learn_english };
+    if (project.id === 5) return { ...project, imageUrl: Landing_Page_2 };
+    if (project.id === 6) return { ...project, imageUrl: Landing_Page_3 };
     return project;
   });
 
